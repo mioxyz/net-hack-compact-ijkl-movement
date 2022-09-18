@@ -4448,7 +4448,7 @@ lock_mouse_buttons(boolean savebtns)
 void
 reset_commands(boolean initial)
 {
-    static const char sdir[] = "hykulnjb><",
+    static const char sdir[] = "jIiLlKkJ><",
                       sdir_swap_yz[] = "hzkulnjb><",
                       ndir[] = "47896321><",
                       ndir_phone_layout[] = "41236987><";
@@ -4568,15 +4568,6 @@ reset_commands(boolean initial)
     /* bind the new keys to movement commands */
     for (i = 0; i < N_DIRS; i++) {
         (void) bind_key_fn(g.Cmd.dirchars[i], move_funcs[i][MV_WALK]);
-        if (!g.Cmd.num_pad) {
-            (void) bind_key_fn(highc(g.Cmd.dirchars[i]),
-                               move_funcs[i][MV_RUN]);
-            (void) bind_key_fn(C(g.Cmd.dirchars[i]), move_funcs[i][MV_RUSH]);
-        } else {
-            /* M(number) works when altmeta is on */
-            (void) bind_key_fn(M(g.Cmd.dirchars[i]), move_funcs[i][MV_RUN]);
-            /* can't bind highc() or C() of digits. just use the 5 prefix. */
-        }
     }
     update_rest_on_space();
     g.Cmd.extcmd_char = cmd_from_func(doextcmd);
